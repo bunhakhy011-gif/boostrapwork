@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Professional CV</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQJkZondrYh4U5J06Mz6v+V16o0d7Mz6XFgU4PjD7z4kG5si0y9F5lEgf" crossorigin="anonymous">
+    <style>
+      body {
+        background-color: #f4f7fb;
+        color: #1f2937;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .profile-card {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+      }
+      .profile-header {
+        display: flex;
+        gap: 2.5rem;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        flex-wrap: nowrap;
+      }
+      .profile-picture {
+        flex-shrink: 0;
+        margin-right: 1rem;
+      }
+      .profile-picture img {
+        width: 140px;
+        height: 280px;
+        display: block;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        object-fit: cover;
+      }
+      .profile-info {
+        flex: 1;
+        padding-top: 0.5rem;
+      }
+      .section-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #0f172a;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #e9ecef;
+      }
+      .divider {
+        width: 40px;
+        height: 2px;
+        background: #0d6efd;
+        border-radius: 1px;
+      }
+      .info-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.8rem;
+        font-size: 0.9rem;
+      }
+      .info-label {
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .info-value {
+        color: #6b7280;
+        text-align: right;
+        flex: 1;
+        padding-left: 1rem;
+      }
+      .cv-tabs input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        left: -9999px;
+      }
+      .tab-buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+        border-radius: 0.75rem;
+        border: 1px solid #c7d2fe;
+      }
+      .tab-buttons label {
+        flex: 1;
+        padding: 0.7rem 1rem;
+        background-color: #ffffff;
+        border: 2px solid #e5e7eb;
+        border-radius: 0.5rem;
+        text-align: center;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        color: #374151;
+      }
+      .tab-buttons label:hover {
+        background-color: #f3f4f6;
+        border-color: #0d6efd;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+      }
+      #tab-about:checked ~ .tab-buttons label[for="tab-about"],
+      #tab-exp:checked ~ .tab-buttons label[for="tab-exp"],
+      #tab-edu:checked ~ .tab-buttons label[for="tab-edu"],
+      #tab-cert:checked ~ .tab-buttons label[for="tab-cert"] {
+        background-color: #0d6efd;
+        color: #ffffff;
+        border-color: #0d6efd;
+        box-shadow: 0 6px 16px rgba(13, 110, 253, 0.3);
+        transform: translateY(-2px);
+      }
+      .tab-panel {
+        display: none;
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
+      }
+      #tab-about:checked ~ .row #panel-about,
+      #tab-exp:checked ~ .row #panel-exp,
+      #tab-edu:checked ~ .row #panel-edu,
+      #tab-cert:checked ~ .row #panel-cert {
+        display: block;
+      }
+      .experience-item {
+        margin-bottom: 1.5rem;
+      }
+      .experience-item:not(:last-child) {
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #e9ecef;
+      }
+      .experience-title {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #0f172a;
+        margin-bottom: 0.25rem;
+      }
+      .experience-company {
+        font-size: 0.85rem;
+        color: #6b7280;
+        margin-bottom: 0.5rem;
+      }
+      .experience-dates {
+        font-size: 0.8rem;
+        color: #9ca3af;
+        margin-bottom: 0.5rem;
+      }
+      .experience-desc {
+        font-size: 0.9rem;
+        color: #374151;
+        line-height: 1.5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container py-4">
+      <!-- Hidden radio inputs for tab control -->
+      <input type="radio" id="tab-about" name="cv-tab" checked style="position: absolute; opacity: 0; left: -9999px;">
+      <input type="radio" id="tab-exp" name="cv-tab" style="position: absolute; opacity: 0; left: -9999px;">
+      <input type="radio" id="tab-edu" name="cv-tab" style="position: absolute; opacity: 0; left: -9999px;">
+      <input type="radio" id="tab-cert" name="cv-tab" style="position: absolute; opacity: 0; left: -9999px;">
+      
+      <div class="row gy-4">
+        <div class="col-lg-12">
+          <div class="profile-card p-5">
+            <div class="profile-header">
+              <!-- Left: Profile Picture -->
+              <div class="profile-picture">
+                <img src="Picture/Profile for CV.jpg" alt="Marjorie D. McGahey">
+              </div>
+              
+              <!-- Right: Information -->
+              <div class="profile-info" style="margin-left: 1.5rem;">
+                <h2 class="h3 mb-2" style="color: #0f172a; font-weight: 700; margin-top: 0;">Marjorie D. McGahey</h2>
+                <p class="text-muted mb-4" style="font-size: 0.95rem; font-weight: 500;">Sales Executive</p>
+                
+                <div class="row" style="gap: 0;">
+                  <div class="col-md-6">
+                    <div class="info-item">
+                      <span class="info-label">Date of birth:</span>
+                      <span class="info-value">April 4, 1987</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Gender:</span>
+                      <span class="info-value">Mail</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Phone:</span>
+                      <span class="info-value">718-564-6972</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="info-item">
+                      <span class="info-label">Email:</span>
+                      <span class="info-value" style="font-size: 0.85rem;">marjorie@yourrapide.com</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Address:</span>
+                      <span class="info-value" style="font-size: 0.8rem;">526 Longview Avenue, Brooklyn, NY</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Website:</span>
+                      <span class="info-value" style="font-size: 0.85rem;">http://marjorie-info.me</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-buttons">
+              <label for="tab-about">About</label>
+              <label for="tab-exp">Experience</label>
+              <label for="tab-edu">Education</label>
+              <label for="tab-cert">Certifications</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Panels -->
+      <div class="row gy-4 mt-3">
+        <div class="col-lg-12">
+          <div class="tab-panel" id="panel-about">
+            <h3 class="section-title">Objective</h3>
+            <p style="text-align: justify; line-height: 1.6; font-size: 0.95rem; color: #374151;">
+              Take advantages of sales skills & experience and understanding of types market to become a professional Sales Staff and bring a lot value to Customers. Becoming a professional in marketing, going to work in dynamic working environment with challenges to develop myself. From that, I will contribute to development of your Company.
+            </p>
+          </div>
+
+          <div class="tab-panel" id="panel-exp">
+            <h3 class="section-title">Work Experience</h3>
+            
+            <div class="experience-item">
+              <div class="experience-dates">May 2011 - Now</div>
+              <div class="experience-company">UHE TRADING COMPANY</div>
+              <div class="experience-title">Sales Executive</div>
+              <div class="experience-desc">
+                • Manage a retail shop in NeyOm province<br>
+                • Holding on current customers and develop new distributors<br>
+                • Handling the problem related to distributors: Display, discount, event plan, network development.
+              </div>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-dates">Jul 2011 - Dec 2013</div>
+              <div class="experience-company">IPSOS BUSINESS CONSULTING VIETNAM CO.</div>
+              <div class="experience-title">Marketing Executive</div>
+              <div class="experience-desc">
+                • Interviewing users according to content of different projects: Statistic the information, collect data from interview.<br>
+                • Inviting the customer coming to the interview in different programs that the content depend on Company.
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="panel-edu">
+            <h3 class="section-title">Education</h3>
+            
+            <div class="experience-item">
+              <div class="experience-dates">Sep 2010 - June 2015</div>
+              <div class="experience-company">FOREIGN TRADE UNIVERSITY</div>
+              <div class="experience-title">Economics and International Business</div>
+              <div class="experience-desc">
+                GPA: 7.34/10
+              </div>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-dates">Sep 2012 - June 2014</div>
+              <div class="experience-company">UNIVERSITY OF ECONOMICS</div>
+              <div class="experience-title">Chief accountant</div>
+              <div class="experience-desc">
+                GPA: 7.5/10
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="panel-cert">
+            <h3 class="section-title">Certifications</h3>
+            
+            <div class="experience-item">
+              <div class="experience-dates">2011-2012</div>
+              <div class="experience-title">The 2nd Prize of Science Research at University</div>
+            </div>
+
+            <div class="experience-item">
+              <div class="experience-dates">2013-2014</div>
+              <div class="experience-title">The award of good at study and contribution to society</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
